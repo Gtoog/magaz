@@ -1,0 +1,25 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using FluentValidation;
+
+namespace gtoog
+{
+    public class ProductValidator : AbstractValidator<Product>
+    {
+        public ProductValidator()
+        {
+            RuleFor(Product => Product.name)
+            .NotEmpty()
+            .WithMessage("Не оставляйте поле имени пустым");
+            RuleFor(Product => Product.price)
+            .NotEmpty()
+            .WithMessage("Не оставляйте поле цены пустым");
+            RuleFor(Product => Product.kolvo)
+            .NotEmpty()
+            .WithMessage("Не оставляйте поле количества пустым");
+        }
+    }
+}
