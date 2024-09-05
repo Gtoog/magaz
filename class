@@ -1,0 +1,63 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace gtoog
+{
+    public static class Store
+    {
+        public static void all(List<Product> list)
+        {
+            foreach (var item in list) 
+            {
+                Console.WriteLine($"Название: {item.name} цена: {item.price} количество: {item.kolvo}");
+            }
+        }
+        public static void search(List<Product> list)
+        {
+            Console.WriteLine("Введите первые буквы поиска товара");
+            string z = Console.ReadLine();
+            List<Product> searchlist = list.Where(x => x.name == z);
+            foreach(var item in searchlist)
+            {
+                    Console.WriteLine($"Название: {item.name} цена: {item.price} количество: {item.kolvo}");
+            }
+
+        }
+        public static void prodaja(List<Product> list)
+        {
+            Console.WriteLine("Введите название товара");
+            Product product = new Product();
+            foreach (var item in list)
+            {
+                if (item.name.Contains(Console.ReadLine()))
+                {
+                    product = item;
+                    break;
+                }
+            }
+            Console.WriteLine("Сколько продать товара?");
+            product.kolvo -= Convert.ToInt32(Console.ReadLine());
+            if (product.kolvo <= 0)
+            {
+                list.Remove(product);
+                Console.WriteLine("Товар закончился");
+            }
+        }
+        public static Product newdop(List<Product> list)
+        {
+            Product p = new Product();
+            Console.WriteLine("Введите название товара");
+            p.name = Console.ReadLine();
+            Console.WriteLine("Введите цену товара");
+            p.price = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Введите количество товара");
+            p.kolvo = Convert.ToInt32(Console.ReadLine());
+            return p;
+        }
+
+    }
+}
